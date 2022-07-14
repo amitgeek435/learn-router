@@ -1,40 +1,25 @@
 import "./App.css";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import { Outlet, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Homepage from "./components/Homepage";
+import About from "./routes/About";
+import Services from "./routes/Services";
+import Error from "./components/Error";
+import Contact from "./components/Contact";
+// import Service1 from "./components/Service1";
+// import Service2 from "./components/Service2";
+// import Service3 from "./components/Service3";
 
 function App() {
   return (
-    <>
-      <Navbar bg="light" expand="lg">
-        <Container>
-          <Navbar.Brand href="/">Home</Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-              <Link to="/about">About</Link>
-              <Link to="/service">Service</Link>
-              <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">
-                  Another action
-                </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">
-                  Something
-                </NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">
-                  Separated link
-                </NavDropdown.Item>
-              </NavDropdown>
-            </Nav>
-            <Outlet />
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" exact element={<Homepage />} />
+        <Route path="/about" exact element={<About />} />
+        <Route path="/contact" exact element={<Contact />} />
+        <Route path="/service/*" element={<Services />} />
+        <Route path="*" exact element={<Error />} />
+      </Routes>
+    </Router>
   );
 }
 
